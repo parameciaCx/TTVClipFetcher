@@ -1,19 +1,26 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import "./App.css"
+import React from 'react';
+import { Navbar, Nav } from 'react-bootstrap';
+import './App.css';
 
 const Navigation = () => {
+	return (
+		<Navbar expand="lg" className="navigator" data-test="navBar">
+			<Nav>
+				<Nav.Link href="/">
+					<li>Home</li>
+				</Nav.Link>
+				<Nav.Link href="/about">
+					<li>About</li>
+				</Nav.Link>
+				<Nav.Link href="/projects">
+					<li>Projects</li>
+				</Nav.Link>
+				<Nav.Link href="/resume">
+					<li>Resume</li>
+				</Nav.Link>
+			</Nav>
+		</Navbar>
+	);
+};
 
-    return(
-            <div data-test="navBar" style={{textAlign:"center"}}>
-
-                <Link to="/"><li>Home</li></Link>
-                <Link to="/about"><li>About</li></Link>
-                <Link to="/projects"><li>Projects</li></Link>
-                <Link to="/resume"><li>Resume</li></Link>
-            </div>
-        )
-  
-}
-
-export default Navigation
+export default Navigation;

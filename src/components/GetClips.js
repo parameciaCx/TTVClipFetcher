@@ -3,6 +3,8 @@ import DatePicker from 'react-datepicker';
 import ClipComp from './ClipComp';
 import Slider from 'react-slick';
 import 'react-datepicker/dist/react-datepicker.css';
+import Button from 'react-bootstrap/Button';
+import './../styles/style.css';
 
 //https://api.twitch.tv/helix/games?name=fortnite gets info on game, name must match
 
@@ -137,21 +139,23 @@ class GetClips extends Component {
 						<div>Loading...</div>
 					) : (
 						<div>
-							Select date:
-							<DatePicker selected={this.state.startDate} onChange={this.dateChange} />
 							<div className="container">
+								Select date:
+								<DatePicker selected={this.state.startDate} onChange={this.dateChange} />
 								<Slider {...settings}>{games}</Slider>
-							</div>
-							{/* <select name="category" value={this.state.category} onChange={this.handleChange}>
+								{/* <select name="category" value={this.state.category} onChange={this.handleChange}>
 								{games}
 							</select> */}
-							Selected:{this.state.category}
-							<button data-test="getClipButton">Get Clips</button>
+								Selected:{this.state.category}
+							</div>
+							<Button variant="light" type="submit">
+								Get Clips
+							</Button>
 						</div>
 					)}
 				</form>
 
-				<div className="displayClips" test-data="clipDisplay">
+				<div test-data="clipDisplay">
 					{this.state.display &&
 						(this.state.loadingClips ? <img src={'loading.svg'} alt="loading.." /> : <div>{clips}</div>)}
 				</div>

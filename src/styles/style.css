@@ -1,0 +1,23 @@
+.slick-slide img {
+	border: 5px solid #fff;
+	display: block;
+	margin: auto;
+}
+
+body {
+	background-color: #dddfd4;
+	font-family: 'Lobster';
+}
+
+.clipCard {
+	border: 5px solid #fff;
+}
+
+.displayClips {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr;
+	grid-gap: 15px 15px;
+}
+
+/*# sourceMappingURL=style.css.map */

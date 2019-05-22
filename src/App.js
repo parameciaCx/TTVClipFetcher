@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './styles.css';
 import GetClips from './components/GetClips';
 
 class App extends Component {

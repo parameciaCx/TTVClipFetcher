@@ -1,0 +1,21 @@
+$colorBtn: rgb(236, 208, 111);
+
+@mixin flexcenter {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.slick-slide img {
+	border: 5px solid #fff;
+	display: block;
+	margin: auto;
+}
+body {
+	background-color: #dddfd4;
+	font-family: 'Lobster';
+}
+
+.clipCard {
+	border: 5px solid #fff;
+}

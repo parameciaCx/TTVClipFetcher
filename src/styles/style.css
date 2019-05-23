@@ -13,11 +13,11 @@ body {
 	border: 5px solid #fff;
 }
 
-.displayClips {
+/* .displayClips {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-template-rows: 1fr;
 	grid-gap: 15px 15px;
-}
+} */
 
 /*# sourceMappingURL=style.css.map */

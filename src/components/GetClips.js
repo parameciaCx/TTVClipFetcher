@@ -5,17 +5,18 @@ import ClipComp from './ClipComp';
 import Slider from 'react-slick';
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
-import Col from 'react-bootstrap/Col';
 import ReactHtmlParser from 'react-html-parser';
 import './../styles/style.css';
+import loading from './../images/loading.svg';
 
 //https://api.twitch.tv/helix/games?name=fortnite gets info on game, name must match
 
 function pad(n) {
 	return n < 10 ? '0' + n : n;
 }
+
+let a = [];
 
 class GetClips extends Component {
 	constructor() {
@@ -70,12 +71,11 @@ class GetClips extends Component {
 
 	handleSubmit(event) {
 		event.preventDefault();
+		let urlUsers = 'https://api.twitch.tv/helix/users';
 		this.setState({
 			loadingClips: true,
 			display: true
 		});
-		console.log(this.state.display);
-		console.log(this.state.loadingClips);
 		fetch(
 			`https://api.twitch.tv/helix/clips?game_id=${this.state
 				.category_id}&started_at=${this.state.startDate.getUTCFullYear()}-${pad(
@@ -85,7 +85,29 @@ class GetClips extends Component {
 		)
 			.then((response) => response.json())
 			.then((response) => {
-				this.setState({ clips: response.data, loadingClips: false });
+				let i;
+				for (i = 0; i < response.data.length; i++) {
+					let tempID = response.data[i].broadcaster_id;
+					if (this.findId(tempID) < 0) {
+						a.push({ id: tempID, url: '' });
+						if (i === 0) {
+							urlUsers += `?id=${tempID}`;
+						} else {
+							urlUsers += `&id=${tempID}`;
+						}
+					}
+				}
+				//fetch streamer profile pictures
+				fetch(urlUsers, this.state.options).then((response2) => response2.json()).then((response2) => {
+					let i;
+					for (i = 0; i < response2.data.length; i++) {
+						a[i].url = response2.data[i].profile_image_url;
+					}
+
+					this.setState({ clips: response.data, loadingClips: false });
+				});
+
+				//this.setState({ clips: response.data });
 			});
 	}
 
@@ -94,12 +116,23 @@ class GetClips extends Component {
 		this.setState({ category: name, category_id: id });
 	}
 
+	findId(bid) {
+		let i;
+		for (i = 0; i < a.length; i++) {
+			if (a[i].id === bid) {
+				return i;
+			}
+		}
+
+		return -1;
+	}
+
 	columnizeClips(array) {
 		let total = 1;
 		let all;
 
 		while (total + 3 <= this.state.numClips) {
-			all += `<div class="row">${ReactDOMServer.renderToStaticMarkup(array[total])}
+			all += `<div class="card-deck">${ReactDOMServer.renderToStaticMarkup(array[total])}
 			${ReactDOMServer.renderToStaticMarkup(array[total + 1])}
 			${ReactDOMServer.renderToStaticMarkup(array[total + 2])}</div>`;
 			total += 3;
@@ -109,15 +142,17 @@ class GetClips extends Component {
 
 		switch (diff) {
 			case 0:
-				all += `<div class="row">${ReactDOMServer.renderToStaticMarkup(array[total])}</div>`;
+				all += `<div class="card-deck">${ReactDOMServer.renderToStaticMarkup(
+					array[total]
+				)}<div class="card"></div><div class="card"></div></div>`;
 				break;
 			case 1:
-				all += `<div class="row">${ReactDOMServer.renderToStaticMarkup(array[total])}
-			${ReactDOMServer.renderToStaticMarkup(array[total + 1])}</div>`;
+				all += `<div class="card-deck">${ReactDOMServer.renderToStaticMarkup(array[total])}
+			${ReactDOMServer.renderToStaticMarkup(array[total + 1])}<div class="card"></div><div class="card"></div></div>`;
 				break;
 
 			case 2:
-				all += `<div class="row">${ReactDOMServer.renderToStaticMarkup(array[total])}
+				all += `<div class="card-deck">${ReactDOMServer.renderToStaticMarkup(array[total])}
 			${ReactDOMServer.renderToStaticMarkup(array[total + 1])}
 			${ReactDOMServer.renderToStaticMarkup(array[total + 2])}</div>`;
 				break;
@@ -155,20 +190,19 @@ class GetClips extends Component {
 		//map fetched clips to clip components
 		const clips = this.state.clips.map((clip) => {
 			return (
-				<Col>
-					<ClipComp
-						key={clip.id}
-						info={{
-							streamer: clip.broadcaster_name,
-							title: clip.title,
-							date: clip.created_at,
-							thumbnail: clip.thumbnail_url,
-							link: clip.url,
-							language: clip.language,
-							views: clip.view_count.toString()
-						}}
-					/>
-				</Col>
+				<ClipComp
+					key={clip.id}
+					info={{
+						streamer: clip.broadcaster_name,
+						title: clip.title,
+						date: clip.created_at,
+						profPic: a[this.findId(clip.broadcaster_id)].url,
+						thumbnail: clip.thumbnail_url,
+						link: clip.url,
+						language: clip.language,
+						views: clip.view_count.toString()
+					}}
+				/>
 			);
 		});
 
@@ -179,14 +213,14 @@ class GetClips extends Component {
 		};
 
 		return (
-			<header data-test="getClipComp">
-				<h1 data-test="getClipDesc">{}</h1>
-
+			<header className="content" data-test="getClipComp">
 				<form onSubmit={this.handleSubmit}>
 					{this.state.loading ? (
-						<div>Loading...</div>
+						<div style={{ position: 'center' }}>
+							<img src={loading} alt="loading.." />
+						</div>
 					) : (
-						<div>
+						<div style={{ textAlign: 'center' }}>
 							<div className="container">
 								Select date:
 								<DatePicker selected={this.state.startDate} onChange={this.dateChange} />
@@ -206,7 +240,7 @@ class GetClips extends Component {
 				<div test-data="clipDisplay">
 					{this.state.display &&
 						(this.state.loadingClips ? (
-							<img src={'loading.svg'} alt="loading.." />
+							<img src={loading} alt="loading.." />
 						) : (
 							<Container>{this.columnizeClips(clips)}</Container>
 						))}

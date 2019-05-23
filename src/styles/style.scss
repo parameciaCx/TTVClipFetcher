@@ -1,7 +1,8 @@
 $colorBtn: rgb(236, 208, 111);
+$iconPadding: 5px;
 
 @mixin flexcenter {
-	display: flex;
+	display: grid;
 	justify-content: center;
 	align-items: center;
 }
@@ -13,9 +14,61 @@ $colorBtn: rgb(236, 208, 111);
 }
 body {
 	background-color: #dddfd4;
-	font-family: 'Lobster';
+	font-family: 'Raleway', sans-serif;
 }
 
-.clipCard {
+.card {
 	border: 5px solid #fff;
+	border-radius: 3px;
+	box-shadow: 3px 3px 5px 6px rgb(173, 155, 155);
+}
+
+.authorInfo {
+	display: flex;
+}
+
+.card-body {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: -10px;
+}
+
+.card-footer {
+	display: flex;
+	justify-content: space-between;
+}
+
+.footerComp {
+	display: flex;
+}
+
+.watchComp {
+	display: flex;
+}
+
+.dlComp {
+	display: flex;
+}
+
+.card-deck {
+	padding-bottom: 20px;
+}
+
+.mb2 {
+	padding-left: $iconPadding;
+}
+
+.dlText {
+	padding-left: $iconPadding;
+}
+.watchText {
+	padding-left: $iconPadding;
+}
+
+.footerText {
+	padding-left: $iconPadding;
+}
+
+.content {
+	@include flexcenter();
 }

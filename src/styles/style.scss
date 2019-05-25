@@ -1,5 +1,6 @@
-$colorBtn: rgb(236, 208, 111);
-$iconPadding: 5px;
+$primaryColor: rgb(136, 207, 215);
+$secondaryColor: rgb(249, 248, 246);
+$iconPadding: 0.3rem;
 
 @mixin flexcenter {
 	display: grid;
@@ -8,19 +9,25 @@ $iconPadding: 5px;
 }
 
 .slick-slide img {
-	border: 5px solid #fff;
+	border: 5px solid rgb(51, 51, 51);
 	display: block;
 	margin: auto;
 }
+
+.slick-next:before,
+.slick-prev:before {
+	color: rgb(51, 51, 51);
+}
+
 body {
-	background-color: #dddfd4;
+	background-color: $primaryColor;
 	font-family: 'Raleway', sans-serif;
 }
 
 .card {
-	border: 5px solid #fff;
-	border-radius: 3px;
-	box-shadow: 3px 3px 5px 6px rgb(173, 155, 155);
+	background-color: $secondaryColor;
+	border: 3px solid #fff;
+	outline: black solid thin;
 }
 
 .authorInfo {
@@ -38,10 +45,6 @@ body {
 	justify-content: space-between;
 }
 
-.footerComp {
-	display: flex;
-}
-
 .watchComp {
 	display: flex;
 }
@@ -51,11 +54,11 @@ body {
 }
 
 .card-deck {
-	padding-bottom: 20px;
+	padding-bottom: 1.5rem;
 }
 
-.mb2 {
-	padding-left: $iconPadding;
+.mb-2 {
+	padding: 0.8rem 0 0 $iconPadding;
 }
 
 .dlText {
@@ -67,6 +70,14 @@ body {
 
 .footerText {
 	padding-left: $iconPadding;
+}
+
+.authorInfo {
+	padding-left: 1rem;
+}
+
+.card-title {
+	padding: 0.5rem 0 0 1rem;
 }
 
 .content {

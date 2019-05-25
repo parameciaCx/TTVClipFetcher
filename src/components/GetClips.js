@@ -228,7 +228,11 @@ class GetClips extends Component {
 								{/* <select name="category" value={this.state.category} onChange={this.handleChange}>
 								{games}
 							</select> */}
-								Selected:{this.state.category}
+								{this.state.category === '' ? (
+									<div>Selected: {this.state.category}</div>
+								) : (
+									<div style={{ fontWeight: 'bold' }}>Selected: {this.state.category}</div>
+								)}
 							</div>
 							<Button variant="light" type="submit">
 								Get Clips

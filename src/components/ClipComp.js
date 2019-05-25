@@ -10,7 +10,7 @@ const ClipComp = (props) => {
 	return (
 		<Card>
 			<Card.Img src={props.info.thumbnail} alt="clip thumbnail" />
-			<Card.Title>{props.info.title}</Card.Title>
+			<Card.Title style={{ fontWeight: 'bold' }}>{props.info.title}</Card.Title>
 			<div className="authorInfo">
 				<Image src={props.info.profPic} roundedCircle height="30px" width="30px" />
 				<Card.Subtitle className="mb-2 text-muted">{props.info.streamer}</Card.Subtitle>

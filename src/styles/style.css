@@ -1,19 +1,23 @@
 .slick-slide img {
-  border: 5px solid #fff;
+  border: 5px solid #333333;
   display: block;
   margin: auto;
 }
 
+.slick-next:before,
+.slick-prev:before {
+  color: #333333;
+}
+
 body {
-  background-color: #dddfd4;
+  background-color: #88cfd7;
   font-family: 'Raleway', sans-serif;
 }
 
 .card {
-  border: 5px solid #fff;
-  border-radius: 3px;
-  -webkit-box-shadow: 3px 3px 5px 6px #ad9b9b;
-          box-shadow: 3px 3px 5px 6px #ad9b9b;
+  background-color: #f9f8f6;
+  border: 3px solid #fff;
+  outline: black solid thin;
 }
 
 .authorInfo {
@@ -41,12 +45,6 @@ body {
           justify-content: space-between;
 }
 
-.footerComp {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .watchComp {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -60,23 +58,31 @@ body {
 }
 
 .card-deck {
-  padding-bottom: 20px;
+  padding-bottom: 1.5rem;
 }
 
-.mb2 {
-  padding-left: 5px;
+.mb-2 {
+  padding: 0.8rem 0 0 0.3rem;
 }
 
 .dlText {
-  padding-left: 5px;
+  padding-left: 0.3rem;
 }
 
 .watchText {
-  padding-left: 5px;
+  padding-left: 0.3rem;
 }
 
 .footerText {
-  padding-left: 5px;
+  padding-left: 0.3rem;
+}
+
+.authorInfo {
+  padding-left: 1rem;
+}
+
+.card-title {
+  padding: 0.5rem 0 0 1rem;
 }
 
 .content {

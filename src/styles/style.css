@@ -36,6 +36,18 @@ body {
   margin-bottom: -10px;
 }
 
+.watchComp {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.dlComp {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .card-footer {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -43,18 +55,6 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-}
-
-.watchComp {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.dlComp {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
 }
 
 .card-deck {

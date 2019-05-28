@@ -39,18 +39,16 @@ body {
 	justify-content: space-between;
 	margin-bottom: -10px;
 }
+.watchComp {
+	align-items: center;
+}
+.dlComp {
+	align-items: center;
+}
 
 .card-footer {
 	display: flex;
 	justify-content: space-between;
-}
-
-.watchComp {
-	display: flex;
-}
-
-.dlComp {
-	display: flex;
 }
 
 .card-deck {
